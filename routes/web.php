@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\user\CalonSiswaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,4 +21,6 @@ use App\Http\Controllers\admin\AdminController;
 
 Route::get('/', [AdminController::class, 'index']);
 Route::get('/login', [AdminController::class, 'login']);
-Route::get('/blog/kontak', 'BlogController@kontak');
+Route::get('/calon-siswa', [CalonSiswaController::class, 'index'])->name('index.DataDiri');
+Route::get('/form-create', [CalonSiswaController::class, 'form_create'])->name('form.DataDiri');
+Route::post('/data-diri-create', [CalonSiswaController::class, 'store'])->name('create.DataDiri');

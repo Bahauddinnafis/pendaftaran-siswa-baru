@@ -42,15 +42,15 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item">
+                <a class="nav-link" href="/form-create">
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <span>Tables</span></a>
+                <a class="nav-link" href="/calon-siswa">
+                    <span>Data Diri</span></a>
             </li>
 
         </ul>

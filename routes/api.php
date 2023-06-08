@@ -15,6 +15,6 @@ use App\Http\Controllers\user\CalonSiswaController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('user/register-user', [App\Http\Controllers\user\AuthController::class, 'register']);
+Route::post('user/login-user', [App\Http\Controllers\user\AuthController::class, 'login']);
+

@@ -32,6 +32,12 @@ Route::get('/register-form-admin', [AuthController::class, 'register_form'])->na
 Route::post('register-admin', [AuthController::class, 'register'])->name('register-admin');
 Route::post('login-admin', [AuthController::class, 'login'])->name('login-admin');
 
+// Route Login & Register User
+Route::get('/login-form-user', [App\Http\Controllers\user\AuthController::class, 'login_form'])->name('login-form-user');
+Route::get('/register-form-user', [App\Http\Controllers\user\AuthController::class, 'register_form'])->name('register-form-user');
+Route::post('register-user', [App\Http\Controllers\user\AuthController::class, 'register'])->name('register-user');
+Route::post('login-user', [App\Http\Controllers\user\AuthController::class, 'login'])->name('login-user');
+
 // Route Form Orang Tua Wali Calon Siswa
 Route::get('/orangtua', [OrangTuaController::class, 'index']);
 Route::get('/orangtua-form', [OrangTuaController::class, 'form_create']);

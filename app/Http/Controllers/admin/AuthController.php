@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
 
 class AuthController extends Controller
 {
@@ -27,8 +29,8 @@ class AuthController extends Controller
             'password' => Hash::make($request ->password),
             'no_telp' => $request -> no_telp,
         ]);
-
-        return view('admin.auth.login')->with('success', 'Registration successful. Please login.');
+        $request->session()->flash('success', 'Registrasi Sukses. Silahkan login.');
+        return redirect()->route('login-form-admin');
     }
 
     public function login(Request $request)
@@ -41,21 +43,20 @@ class AuthController extends Controller
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            return redirect()->intended('/admin')->with('success', 'Login successful. Please login.');
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Email atau password salah.',
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->user()->tokens()->delete();
+        Auth::guard('admin')->logout();
 
-        return [
-            'message' => 'You have successfully logged out and the token was successfully deleted'
-        ];
+        $request->session()->flash('success', 'Logout telah berhasil.');
+        return redirect('login-form-admin');
     }
 
     public function login_form() {

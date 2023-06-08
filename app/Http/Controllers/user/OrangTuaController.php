@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 class OrangTuaController extends Controller
 {
-    public function index($id_user=1)
+    public function index($id_user = 1)
     {
         $orang_tua_wali_calon_siswa = OrangTuaModel::where('id_user', $id_user)->get();
-        $orang_tua_wali_calon_siswa = $orang_tua_wali_calon_siswa->map(function ($item){
+        $orang_tua_wali_calon_siswa = $orang_tua_wali_calon_siswa->map(function ($item) {
             return [
                 "nama_ayah" => $item->nama_ayah,
                 "tanggal_lahir_ayah" => $item->tanggal_lahir_ayah,
@@ -22,12 +22,14 @@ class OrangTuaController extends Controller
                 "pekerjaan_ayah" => $item->pekerjaan_ayah,
                 "penghasilan_ayah" => $item->penghasilan_ayah,
                 "no_telp_ayah" => $item->no_telp_ayah,
+                "nama_ibu" => $item->nama_ibu,
                 "tanggal_lahir_ibu" => $item->tanggal_lahir_ibu,
                 "tempat_lahir_ibu" => $item->tempat_lahir_ibu,
                 "pendidikan_ibu" => $item->pendidikan_ibu,
                 "pekerjaan_ibu" => $item->pekerjaan_ibu,
                 "penghasilan_ibu" => $item->penghasilan_ibu,
                 "no_telp_ibu" => $item->no_telp_ibu,
+                "nama_wali" => $item->nama_wali,
                 "tanggal_lahir_wali" => $item->tanggal_lahir_wali,
                 "tempat_lahir_wali" => $item->tempat_lahir_wali,
                 "pendidikan_wali" => $item->pendidikan_wali,
@@ -51,58 +53,58 @@ class OrangTuaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama_ayah' => 'required',
-            'tanggal_lahir_ayah' => 'required',     
-            'tempat_lahir_ayah' => 'required', 
-            'pendidikan_ayah' => 'required',    
-            'pekerjaan_ayah' => 'required',    
-            'penghasilan_ayah' => 'required',    
-            'no_telp_ayah' => 'required', 
-            'nama_ibu' => 'required',
-            'tanggal_lahir_ibu' => 'required',     
-            'tempat_lahir_ibu' => 'required', 
-            'pendidikan_ibu' => 'required',    
-            'pekerjaan_ibu' => 'required',    
-            'penghasilan_ibu' => 'required',    
-            'no_telp_ibu' => 'required',
-            'nama_wali' => 'required',
-            'tanggal_lahir_wali' => 'required',     
-            'tempat_lahir_wali' => 'required', 
-            'pendidikan_wali' => 'required',    
-            'pekerjaan_wali' => 'required',    
-            'penghasilan_wali' => 'required',    
-            'no_telp_wali' => 'required', 
-            'id_user' => 'required',   
+            'nama_ayah',
+            'tanggal_lahir_ayah',
+            'tempat_lahir_ayah',
+            'pendidikan_ayah',
+            'pekerjaan_ayah',
+            'penghasilan_ayah',
+            'no_telp_ayah',
+            'nama_ibu',
+            'tanggal_lahir_ibu',
+            'tempat_lahir_ibu',
+            'pendidikan_ibu',
+            'pekerjaan_ibu',
+            'penghasilan_ibu',
+            'no_telp_ibu',
+            'nama_wali',
+            'tanggal_lahir_wali',
+            'tempat_lahir_wali',
+            'pendidikan_wali',
+            'pekerjaan_wali',
+            'penghasilan_wali',
+            'no_telp_wali',
+            'id_user' => 'required',
         ]);
-        
+
         $orang_tua_wali_calon_siswa = OrangTuaModel::create([
-            'nama_ayah' => $request -> nama_ayah,
-            'tanggal_lahir_ayah' => $request -> tanggal_lahir_ayah,
-            'tempat_lahir_ayah' => $request -> tempat_lahir_ayah,
-            'pendidikan_ayah' => $request -> pendidikan_ayah,
-            'pekerjaan_ayah' => $request -> pekerjaan_ayah,
-            'penghasilan_ayah' => $request -> penghasilan_ayah,
-            'no_telp_ayah' => $request -> no_telp_ayah,
-            'nama_ibu' => $request -> nama_ibu,
-            'tanggal_lahir_ibu' => $request -> tanggal_lahir_ibu,
-            'tempat_lahir_ibu' => $request -> tempat_lahir_ibu,
-            'pendidikan_ibu' => $request -> pendidikan_ibu,
-            'pekerjaan_ibu' => $request -> pekerjaan_ibu,
-            'penghasilan_ibu' => $request -> penghasilan_ibu,
-            'no_telp_ibu' => $request -> no_telp_ibu,
-            'nama_wali' => $request -> nama_wali,
-            'tanggal_lahir_wali' => $request -> tanggal_lahir_wali,
-            'tempat_lahir_wali' => $request -> tempat_lahir_wali,
-            'pendidikan_wali' => $request -> pendidikan_wali,
-            'pekerjaan_wali' => $request -> pekerjaan_wali,
-            'penghasilan_wali' => $request -> penghasilan_wali,
-            'no_telp_wali' => $request -> no_telp_ayah,
-            'id_user' => $request -> id_user,
+            'nama_ayah' => $request->nama_ayah,
+            'tanggal_lahir_ayah' => $request->tanggal_lahir_ayah,
+            'tempat_lahir_ayah' => $request->tempat_lahir_ayah,
+            'pendidikan_ayah' => $request->pendidikan_ayah,
+            'pekerjaan_ayah' => $request->pekerjaan_ayah,
+            'penghasilan_ayah' => $request->penghasilan_ayah,
+            'no_telp_ayah' => $request->no_telp_ayah,
+            'nama_ibu' => $request->nama_ibu,
+            'tanggal_lahir_ibu' => $request->tanggal_lahir_ibu,
+            'tempat_lahir_ibu' => $request->tempat_lahir_ibu,
+            'pendidikan_ibu' => $request->pendidikan_ibu,
+            'pekerjaan_ibu' => $request->pekerjaan_ibu,
+            'penghasilan_ibu' => $request->penghasilan_ibu,
+            'no_telp_ibu' => $request->no_telp_ibu,
+            'nama_wali' => $request->nama_wali,
+            'tanggal_lahir_wali' => $request->tanggal_lahir_wali,
+            'tempat_lahir_wali' => $request->tempat_lahir_wali,
+            'pendidikan_wali' => $request->pendidikan_wali,
+            'pekerjaan_wali' => $request->pekerjaan_wali,
+            'penghasilan_wali' => $request->penghasilan_wali,
+            'no_telp_wali' => $request->no_telp_wali,
+            'id_user' => $request->id_user,
         ]);
-        if($orang_tua_wali_calon_siswa){
-            return view('user.orangtua')->with(['success' => 'Data Berhasil Disimpan!']);
-        }else{
-            return view('user.form-orangtua')->with(['error' => 'Data Gagal Disimpan!']);
+        if ($orang_tua_wali_calon_siswa) {
+            return redirect()->route('orangtua')->with(['success' => 'Data Berhasil Disimpan!']);
+        } else {
+            return redirect()->route('orangtua-form')->with(['error' => 'Data Gagal Disimpan!']);
         }
         // return response()->json($calon_siswa, HttpFoundationResponse::HTTP_OK);
     }
@@ -121,9 +123,9 @@ class OrangTuaController extends Controller
             'message' => 'Success update data user',
             'data' => $orang_tua_wali_calon_siswa
         ];
-        if($orang_tua_wali_calon_siswa){
+        if ($orang_tua_wali_calon_siswa) {
             return view('user.orangtua')->with(['success' => 'Data Berhasil Disimpan!']);
-        }else{
+        } else {
             return view('user.form-orangtua')->with(['error' => 'Data Gagal Disimpan!']);
         }
     }
@@ -131,7 +133,6 @@ class OrangTuaController extends Controller
     public function destroy($id_user)
     {
         OrangTuaModel::destroy($id_user);
-        // return MapelModel::all();
 
         $response = [
             'status' => true,

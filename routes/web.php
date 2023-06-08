@@ -31,8 +31,8 @@ Route::post('register-admin', [AuthController::class, 'register']);
 Route::post('login-admin', [AuthController::class, 'login']);
 
 // Route Form Orang Tua Wali Calon Siswa
-Route::get('/orangtua', [OrangTuaController::class, 'index']);
-Route::get('/orangtua-form', [OrangTuaController::class, 'form_create']);
-Route::post('/orangtua-form', [OrangTuaController::class, 'store']);
+Route::get('/orangtua', [OrangTuaController::class, 'index'])->name('orangtua');
+Route::get('/orangtua-form', [OrangTuaController::class, 'form_create'])->name('orangtua-form');
+Route::post('/orangtua-create', [OrangTuaController::class, 'store'])->name('orangtua-create');
 // Route::put('/orangtua-form/{id}', [OrangTuaController::class, 'update']);
 // Route::delete('/orangtua-form/{id}', [OrangTuaController::class, 'destroy']);

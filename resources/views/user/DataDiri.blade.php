@@ -9,7 +9,8 @@
 <!-- isi bagian konten -->
 <!-- cara penulisan isi section yang panjang -->
 @section('konten')
-@foreach ($calon_siswa as $siswa)
+<h1>AKak</h1>
+{{-- @foreach ($calon_siswa as $siswa)
 	<div class="card">
         <ol class="list-group list-group-numbered">
             <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -80,6 +81,6 @@
             </li>
           </ol>
     </div>
-    @endforeach
+    @endforeach --}}
  
 @endsection

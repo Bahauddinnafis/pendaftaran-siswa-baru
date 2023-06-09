@@ -43,14 +43,19 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="/form-create">
+                <a class="nav-link" href="/user">
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="/calon-siswa">
+                <a class="nav-link" href="/user/calon-siswa">
                     <span>Data Diri</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/user/cek-ortu">
+                    <span>Data Orang Tua</span></a>
             </li>
 
         </ul>
@@ -74,7 +79,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('user')->user()->nama_lengkap }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{!! asset('assets/img/undraw_profile.svg') !!}">
                             </a>
@@ -148,7 +153,10 @@
                 <div class="modal-body">Klik logout untuk keluar dari website.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form action="/user/logout-user" method="POST">
+                        @csrf
+                        <input class="submit btn btn-primary" type="submit" value="Logout">
+                    </form>
                 </div>
             </div>
         </div>

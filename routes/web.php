@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\user\CalonSiswaController;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\Admin\JadwalController;
@@ -35,12 +34,16 @@ Route::get('/register-form-admin', [AuthController::class, 'register_form'])->na
 Route::post('register-admin', [AuthController::class, 'register'])->name('register-admin');
 Route::post('login-admin', [AuthController::class, 'login'])->name('login-admin');
 
+// Route Login & Register User
+Route::get('/login-form-user', [App\Http\Controllers\user\AuthController::class, 'login_form'])->name('login-form-user');
+Route::get('/register-form-user', [App\Http\Controllers\user\AuthController::class, 'register_form'])->name('register-form-user');
+Route::post('register-user', [App\Http\Controllers\user\AuthController::class, 'register'])->name('register-user');
+Route::post('login-user', [App\Http\Controllers\user\AuthController::class, 'login'])->name('login-user');
+
 // Route Form Orang Tua Wali Calon Siswa
-Route::get('/orangtua', [OrangTuaController::class, 'index']);
-Route::get('/orangtua-form', [OrangTuaController::class, 'form_create']);
-Route::post('/orangtua-form', [OrangTuaController::class, 'store']);
-// Route::put('/orangtua-form/{id}', [OrangTuaController::class, 'update']);
-// Route::delete('/orangtua-form/{id}', [OrangTuaController::class, 'destroy']);
+
+Route::post('logout-user', [App\Http\Controllers\user\AuthController::class, 'logout'])->name('logout-user');
+
 
 // Masukkan route yang digunakan untuk admin
 Route::prefix('admin')->middleware(['admin'])->group(function () {
@@ -64,12 +67,18 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
 });
 
 // Masukkan route yang digunakan untuk user
-Route::middleware(['user'])->group(function () {
-    Route::get('/calon-siswa', [CalonSiswaController::class, 'index'])->name('index.DataDiri'); // Get Calon Siswa
-    Route::get('/form-create', [CalonSiswaController::class, 'form_create'])->name('form.DataDiri'); // Form Calon Siswa
-    Route::post('/data-diri-create', [CalonSiswaController::class, 'store'])->name('create.DataDiri'); // Create Calon Siswa
+Route::prefix('user')->middleware(['user'])->group(function () {
+    // Route::get('/dashboard',  [App\Http\Controllers\user\Dashboard::class, 'index']);
+    Route::get('/', [App\Http\Controllers\user\DashboardController::class, 'index'])->name('dashboard-siswa');
+    Route::get('/calon-siswa', [App\Http\Controllers\user\CalonSiswaController::class, 'index'])->name('index.DataDiri'); // Get Calon Siswa
+    Route::get('/form-create', [App\Http\Controllers\user\CalonSiswaController::class, 'form_create'])->name('form.DataDiri'); // Form Calon Siswa
+    Route::post('/data-diri-create', [App\Http\Controllers\user\CalonSiswaController::class, 'store'])->name('create.DataDiri'); // Create Calon Siswa
 
-    Route::get('/orangtua', [OrangTuaController::class, 'index']);
-    Route::get('/orangtua-form', [OrangTuaController::class, 'form_create']);
-    Route::post('/orangtua-form', [OrangTuaController::class, 'store']);
+    Route::get('/cek-ortu', [App\Http\Controllers\user\OrangTuaController::class, 'index'])->name('cek-ortu');
+    Route::get('/orangtua', [App\Http\Controllers\user\OrangTuaController::class, 'data_ortu'])->name('orangtua');
+    Route::get('/orangtua-form', [App\Http\Controllers\user\OrangTuaController::class, 'form_create'])->name('orangtua-form');
+    Route::post('/orangtua-create', [App\Http\Controllers\user\OrangTuaController::class, 'store'])->name('orangtua-create');
+    Route::get('/orangtua-form-edit/{id}', [App\Http\Controllers\user\OrangTuaController::class, 'form_update'])->name('orangtua-form-edit');
+    Route::put('/orangtua-update/{id}', [App\Http\Controllers\user\OrangTuaController::class, 'update'])->name('orangtua-update');
+
 });

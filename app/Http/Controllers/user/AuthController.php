@@ -48,8 +48,7 @@ class AuthController extends Controller
 
         if (Auth::guard('user')->attempt($credentials)) {
             $request->session()->regenerate();
-
-            return redirect()->intended('/')->with('success', 'login successfull');
+            return redirect()->intended('/user')->with('success', 'Login successful.');
         }
 
         return back()->withErrors([
@@ -63,5 +62,13 @@ class AuthController extends Controller
 
     public function register_form() {
         return view('user.auth.register');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('user')->logout();
+
+        $request->session()->flash('success', 'Logout telah berhasil.');
+        return redirect('login-form-user');
     }
 }

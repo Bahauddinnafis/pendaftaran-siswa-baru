@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\AdminModel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -43,7 +42,7 @@ class AuthController extends Controller
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/admin')->with('success', 'Login successful. Please login.');
+            return redirect()->intended('/user')->with('success', 'Login successful.');
         }
 
         return back()->withErrors([

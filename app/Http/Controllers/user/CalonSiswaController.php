@@ -5,35 +5,45 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\CalonSiswaModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 class CalonSiswaController extends Controller
 {
-    public function index($id_user=1)
-    {
-        $calon_siswa = CalonSiswaModel::where('id_user', $id_user)->get();
-        $calon_siswa = $calon_siswa->map(function ($item) {
-            return [
-                "id" => $item->id,
-                "nama_lengkap" => $item->nama_lengkap,
-                "foto" => $item->foto ? (url(Storage::url('foto_siswa/' . $item->foto))) : null,
-                "tanggal_lahir" => $item->tanggal_lahir,
-                "tempat_lahir" => $item->tempat_lahir,
-                "umur" => $item->umur,
-                "alamat" => $item->alamat,
-                "jenis_kelamin" => $item->jenis_kelamin,
-                "anak_ke" => $item->anak_ke,
-                "jumlah_saudara" => $item->jumlah_saudara,
-                "asal_sekolah" => $item->asal_sekolah,
-                "id_jurusan1" => $item->id_jurusan1,
-                "id_jurusan2" => $item->id_jurusan2,
-                "created_at" => $item->created_at,
-                "updated_at" => $item->updated_at,
-            ];
-        });
+    public function index() {
+        
+        $user = Auth::user();
+        $id_user = $user->id;
+        $cek_calon = CalonSiswaModel::where('id_user', $id_user)->first();
+        // dd($cek_calon!=null);
+        if($cek_calon!=null)
+        {
+            $calon_siswa = CalonSiswaModel::where('id_user', $id_user)->get();
+            $calon_siswa = $calon_siswa->map(function ($item) {
+                return [
+                    "id" => $item->id,
+                    "nama_lengkap" => $item->nama_lengkap,
+                    "foto" => $item->foto ? (url(Storage::url('foto_siswa/' . $item->foto))) : null,
+                    "tanggal_lahir" => $item->tanggal_lahir,
+                    "tempat_lahir" => $item->tempat_lahir,
+                    "umur" => $item->umur,
+                    "alamat" => $item->alamat,
+                    "jenis_kelamin" => $item->jenis_kelamin,
+                    "anak_ke" => $item->anak_ke,
+                    "jumlah_saudara" => $item->jumlah_saudara,
+                    "asal_sekolah" => $item->asal_sekolah,
+                    "id_jurusan1" => $item->id_jurusan1,
+                    "id_jurusan2" => $item->id_jurusan2,
+                    "created_at" => $item->created_at,
+                    "updated_at" => $item->updated_at,
+                ];
+            });
 
-        return view('user.DataDiri', compact('calon_siswa'))->with('success', 'Data siswa telah dimuat.');
+            return redirect()->route('index.DataDiri', compact('calon_siswa'))->with('success', 'Data siswa telah dimuat.');
+        } else {
+            return redirect()->route('form.DataDiri');
+        }
     }
 
     public function form_create()

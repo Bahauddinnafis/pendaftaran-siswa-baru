@@ -1,5 +1,5 @@
 <!-- Menghubungkan dengan view template master -->
-@extends('admin.layout.navbar')
+@extends('user.layout.navbar')
  
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->

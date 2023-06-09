@@ -1,5 +1,5 @@
 <!-- Menghubungkan dengan view template master -->
-@extends('admin.layout.navbar')
+@extends('user.layout.navbar')
  
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
@@ -101,11 +101,7 @@
     <label for="exampleFormControlInput1" class="form-label">No Telp Wali</label>
     <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="08123456789" name="no_telp_wali">
 </div>
-<div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Id User</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="masukkan id user" name="id_user">
-</div>
-<input type="submit" value="Submit" class="btn btn-primary btn-user btn-block">
+<input type="submit" value="Submit" class="w-100 btn btn-lg btn-danger btn-block mt-3">
 </form>
 
 

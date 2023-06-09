@@ -66,4 +66,12 @@ class AuthController extends Controller
     {
         return view('user.auth.register');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('user')->logout();
+
+        $request->session()->flash('success', 'Logout telah berhasil.');
+        return redirect('login-form-user');
+    }
 }

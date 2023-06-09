@@ -5,16 +5,33 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\OrangTuaModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 class OrangTuaController extends Controller
 {
-    public function index($id_user = 1)
+    public function index()
     {
+        $user = Auth::user();
+        $id_user = $user->id;
+        $cek_ortu = OrangTuaModel::where('id_user', $id_user)->first();
+        if ($cek_ortu) {
+            return redirect()->route('orangtua')->with('succes', 'Data Orang Tua Wali Calon Siswa telah dimuat.');
+        } else {
+
+            return redirect()->route('orangtua-form');
+        }
+    }
+
+    public function data_ortu()
+    {
+        $user = Auth::user();
+        $id_user = $user->id;
         $orang_tua_wali_calon_siswa = OrangTuaModel::where('id_user', $id_user)->get();
         $orang_tua_wali_calon_siswa = $orang_tua_wali_calon_siswa->map(function ($item) {
             return [
+                "id" => $item->id,
                 "nama_ayah" => $item->nama_ayah,
                 "tanggal_lahir_ayah" => $item->tanggal_lahir_ayah,
                 "tempat_lahir_ayah" => $item->tempat_lahir_ayah,
@@ -41,8 +58,7 @@ class OrangTuaController extends Controller
                 "updated_at" => $item->updated_at,
             ];
         });
-
-        return view('user.orangtua', compact('orang_tua_wali_calon_siswa'))->with('success', 'Data orang tua wali telah dimuat.');
+        return view('user.orangtua', compact('orang_tua_wali_calon_siswa'));
     }
 
     public function form_create()
@@ -74,8 +90,10 @@ class OrangTuaController extends Controller
             'pekerjaan_wali',
             'penghasilan_wali',
             'no_telp_wali',
-            'id_user' => 'required',
+            'id_user',
         ]);
+        $user = Auth::user();
+        $id_user = $user->id;
 
         $orang_tua_wali_calon_siswa = OrangTuaModel::create([
             'nama_ayah' => $request->nama_ayah,
@@ -99,24 +117,29 @@ class OrangTuaController extends Controller
             'pekerjaan_wali' => $request->pekerjaan_wali,
             'penghasilan_wali' => $request->penghasilan_wali,
             'no_telp_wali' => $request->no_telp_wali,
-            'id_user' => $request->id_user,
+            'id_user' => $id_user,
         ]);
         if ($orang_tua_wali_calon_siswa) {
             return redirect()->route('orangtua')->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
-            return redirect()->route('orangtua-form')->with(['error' => 'Data Gagal Disimpan!']);
+            return redirect()->route('orangtua-x')->with(['error' => 'Data Gagal Disimpan!']);
         }
         // return response()->json($calon_siswa, HttpFoundationResponse::HTTP_OK);
     }
 
-    public function form_update()
+    public function form_update($id)
     {
-        return view('user.form-orangtua');
+        $orang_tua_wali_calon_siswa = OrangTuaModel::find($id);
+
+        if (!$orang_tua_wali_calon_siswa) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
+        return view('user.form-edit-orangtua', compact('orang_tua_wali_calon_siswa'));
     }
 
-    public function update(Request $request, $id_user)
+    public function update(Request $request, $id)
     {
-        $orang_tua_wali_calon_siswa = OrangTuaModel::find($id_user);
+        $orang_tua_wali_calon_siswa = OrangTuaModel::find($id);
         $orang_tua_wali_calon_siswa->update($request->all());
         $response = [
             'status' => true,
@@ -124,9 +147,9 @@ class OrangTuaController extends Controller
             'data' => $orang_tua_wali_calon_siswa
         ];
         if ($orang_tua_wali_calon_siswa) {
-            return view('user.orangtua')->with(['success' => 'Data Berhasil Disimpan!']);
+            return redirect()->route('orangtua', compact('orang_tua_wali_calon_siswa'))->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
-            return view('user.form-orangtua')->with(['error' => 'Data Gagal Disimpan!']);
+            return view('user.form-edit-orangtua')->with(['error' => 'Data Gagal Disimpan!']);
         }
     }
 

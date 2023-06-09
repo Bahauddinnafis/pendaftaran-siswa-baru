@@ -9,58 +9,34 @@ use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 class JadwalController extends Controller
 {
-    public function index($id = null)
-    {
-        if ($id === null) {
-            $jadwal = JadwalModel::get();
-        } else {
-            $jadwal = JadwalModel::find($id);
-        }
-        $response = [
-            'status' => true,
-            'message' => 'Data jadwal',
-            'data' => $jadwal,
-        ];
-        return response()->json($response, HttpFoundationResponse::HTTP_OK);
-    }
-
     public function store(Request $request)
     {
-        //
         $request->validate([
-            'tanggal_tes','waktu_tes','kuota', 'sisa_kuota'=>'required',
+            'tanggal_tes' => 'required|date',
+            'waktu_tes' => 'required|integer',
+            'kuota' => 'required|integer',
+            'sisa_kuota' => 'required|integer',
         ]);
-        $data = JadwalModel::create($request->all());
-        $response = [
-            'status' => true,
-            'message' => 'Sukses Membuat Data Jadwal',
-            'data' => $data
-        ];
-        return response()->json($response, HttpFoundationResponse::HTTP_OK);
+
+        $jadwal=JadwalModel::create([
+            'tanggal_tes' => $request -> tanggal_tes,
+            'waktu_tes' => $request -> waktu_tes,
+            'kuota' => $request ->kuota,
+            'sisa_kuota' => $request -> sisa_kuota,
+        ]);
+        if($jadwal){
+            return redirect()->route('index-jadwal')->with(['success' => 'Data Berhasil Disimpan!']);
+        }else{
+            return view('admin.form-jadwal')->with(['error' => 'Data Gagal Disimpan!']);
+        }
     }
 
-    public function update(Request $request,$id)
-    {
-        //
-        $jadwal=JadwalModel::find($id);
-        $jadwal->update($request->all());
-        $response = [
-            'status' => true,
-            'message' => 'Sukses Update Data Jadwal',
-            'data' => $jadwal
-        ];
-        return response()->json($response, HttpFoundationResponse::HTTP_OK);
+    public function form_jadwal_create(){
+        return view('admin.form-jadwal'); 
     }
 
-    public function destroy($id)
-    {
-        JadwalModel::destroy($id);
-        // return JenisUjianModel::all();
-        
-        $response = [
-            'status' => true,
-            'message' => 'Sukses Menghapus Data Jadwal',
-        ];
-        return response()->json($response, HttpFoundationResponse::HTTP_OK);
-}
+    public function index(){
+        $jadwal=JadwalModel::get();
+        return view('admin.jadwal', compact('jadwal'))->with('success', 'Data orang tua wali telah dimuat.');    }
+
 }

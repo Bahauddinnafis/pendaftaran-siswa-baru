@@ -5,6 +5,9 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\user\CalonSiswaController;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\Admin\JadwalController;
+use App\Http\Controllers\Admin\JurusanController;
+use App\Http\Controllers\Admin\RuangController;
 use App\Http\Controllers\user\OrangTuaController;
 
 /*
@@ -44,6 +47,20 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/profile', [AdminController::class, 'profil']);
     Route::post('logout-admin', [AuthController::class, 'logout']);
+
+    Route::get('/jadwal', [JadwalController::class, 'index'])->name('index-jadwal');
+    Route::get('/form-jadwal-create', [JadwalController::class, 'form_jadwal_create'])->name('form-jadwal-create');
+    Route::post('/create-form-jadwal', [JadwalController::class, 'store'])->name('create-jadwal');
+
+
+    Route::get('/ruang', [RuangController::class, 'index'])->name('index-ruang');
+    Route::get('/form-ruang-create', [RuangController::class, 'form_ruang_create'])->name('form-ruang-create');
+    Route::post('/create-form-ruang', [RuangController::class, 'store'])->name('create-ruang');
+
+    Route::get('/jurusan', [JurusanController::class, 'index'])->name('index-jurusan');
+    Route::get('/form-jurusan-create', [JurusanController::class, 'form_jurusan_create'])->name('form-jurusan-create');
+    Route::post('/create-form-jurusan', [JurusanController::class, 'store'])->name('create-jurusan');
+
 });
 
 // Masukkan route yang digunakan untuk user

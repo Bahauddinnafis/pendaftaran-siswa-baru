@@ -49,7 +49,7 @@ class AuthController extends Controller
         if (Auth::guard('user')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/')->with('success', 'login successfull');
+            return redirect()->intended('/user')->with('success', 'login successfull');
         }
 
         return back()->withErrors([
@@ -57,11 +57,13 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login_form() {
+    public function login_form()
+    {
         return view('user.auth.login');
     }
 
-    public function register_form() {
+    public function register_form()
+    {
         return view('user.auth.register');
     }
 }

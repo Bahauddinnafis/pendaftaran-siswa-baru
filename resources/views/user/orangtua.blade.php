@@ -132,6 +132,7 @@
 		  {{ $ortu['id_user'] }}
 		</div>
 	</li>
+	<input type="submit" value="Edit" class="btn btn-primary btn-user btn-block">
   </ol>
 </form>
 @endforeach 

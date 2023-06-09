@@ -54,7 +54,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/user/orangtua">
+                <a class="nav-link" href="/user/cek-ortu">
                     <span>Data Orang Tua</span></a>
             </li>
 

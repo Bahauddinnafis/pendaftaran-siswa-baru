@@ -38,11 +38,9 @@ Route::post('register-user', [App\Http\Controllers\user\AuthController::class, '
 Route::post('login-user', [App\Http\Controllers\user\AuthController::class, 'login'])->name('login-user');
 
 // Route Form Orang Tua Wali Calon Siswa
-// Route::get('/orangtua', [OrangTuaController::class, 'index']);
-// Route::get('/orangtua-form', [OrangTuaController::class, 'form_create']);
-// Route::post('/orangtua-form', [OrangTuaController::class, 'store']);
-// Route::put('/orangtua-form/{id}', [OrangTuaController::class, 'update']);
-// Route::delete('/orangtua-form/{id}', [OrangTuaController::class, 'destroy']);
+
+Route::post('logout-user', [App\Http\Controllers\user\AuthController::class, 'logout'])->name('logout-user');
+
 
 // Masukkan route yang digunakan untuk admin
 Route::prefix('admin')->middleware(['admin'])->group(function () {
@@ -63,8 +61,11 @@ Route::prefix('user')->middleware(['user'])->group(function () {
     Route::put('/data-diri-edit/{id}', [App\Http\Controllers\user\CalonSiswaController::class, 'update'])->name('edit-data-diri'); // Edit Calon Siswa
 
 
-    Route::get('/orangtua', [App\Http\Controllers\user\OrangTuaController::class, 'index'])->name('orangtua');
+    Route::get('/cek-ortu', [App\Http\Controllers\user\OrangTuaController::class, 'index'])->name('cek-ortu');
+    Route::get('/orangtua', [App\Http\Controllers\user\OrangTuaController::class, 'data_ortu'])->name('orangtua');
     Route::get('/orangtua-form', [App\Http\Controllers\user\OrangTuaController::class, 'form_create'])->name('orangtua-form');
-    Route::post('/orangtua-create',[App\Http\Controllers\user\OrangTuaController::class, 'store'])->name('orangtua-create');
-    Route::post('logout-user',[App\Http\Controllers\user\AuthController::class, 'logout'])->name('logout-user');
+    Route::post('/orangtua-create', [App\Http\Controllers\user\OrangTuaController::class, 'store'])->name('orangtua-create');
+    Route::get('/orangtua-form-edit/{id}', [App\Http\Controllers\user\OrangTuaController::class, 'form_update'])->name('orangtua-form-edit');
+    Route::put('/orangtua-update/{id}', [App\Http\Controllers\user\OrangTuaController::class, 'update'])->name('orangtua-update');
+
 });

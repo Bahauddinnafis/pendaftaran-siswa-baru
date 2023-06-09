@@ -50,6 +50,10 @@
                     <span>Siswa</span></a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="admin/jadwal">
+                    <span>Jadwal</span></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <span>Jurusan</span></a>
             </li>

@@ -42,7 +42,7 @@
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item">
-                <a class="nav-link" href="/dashboard-siswa">
+                <a class="nav-link" href="/admin/">
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item">

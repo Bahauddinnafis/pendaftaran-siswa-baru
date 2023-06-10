@@ -18,6 +18,11 @@ class UserMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Auth::guard('user')->check()) {
+            $user = Auth::guard('user')->user();
+            if ($user->status_akun == 1 && $request->route()->getName() !== 'dashboard-siswa') {
+                return redirect()->route('dashboard-siswa'); // Mengalihkan pengguna ke halaman dashboard
+            }
+            
             // Admin autentikasi berhasil
             return $next($request);
         }

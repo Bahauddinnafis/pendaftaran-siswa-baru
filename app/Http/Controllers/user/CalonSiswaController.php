@@ -11,14 +11,14 @@ use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 class CalonSiswaController extends Controller
 {
-    public function index() {
-        
+    public function index()
+    {
+
         $user = Auth::user();
         $id_user = $user->id;
         $cek_calon = CalonSiswaModel::where('id_user', $id_user)->first();
         // dd($cek_calon!=null);
-        if($cek_calon!=null)
-        {
+        if ($cek_calon != null) {
             $calon_siswa = CalonSiswaModel::where('id_user', $id_user)->get();
             $calon_siswa = $calon_siswa->map(function ($item) {
                 return [
@@ -64,39 +64,36 @@ class CalonSiswaController extends Controller
             'anak_ke' => 'required',
             'jumlah_saudara' => 'required',
             'asal_sekolah' => 'required',
-            'id_user' => 'required',      
+            'id_user' => 'required',
         ]);
 
         $foto = $request->file('foto');
         $foto->storeAs('public/foto_siswa', $foto->hashName());
 
-        
+
         $calon_siswa = CalonSiswaModel::create([
-            'nama_lengkap' => $request -> nama_lengkap,
+            'nama_lengkap' => $request->nama_lengkap,
             'foto' =>  $foto->hashName(),
-            'tanggal_lahir' => $request -> tanggal_lahir,
-            'tempat_lahir' => $request -> tempat_lahir,
-            'umur' => $request -> umur,
-            'alamat' => $request -> alamat,
-            'jenis_kelamin' => $request -> jenis_kelamin,
-            'anak_ke' => $request -> anak_ke,
-            'jumlah_saudara' => $request -> jumlah_saudara,
-            'asal_sekolah' => $request -> asal_sekolah,
-            'id_user' => $request -> id_user,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'tempat_lahir' => $request->tempat_lahir,
+            'umur' => $request->umur,
+            'alamat' => $request->alamat,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'anak_ke' => $request->anak_ke,
+            'jumlah_saudara' => $request->jumlah_saudara,
+            'asal_sekolah' => $request->asal_sekolah,
+            'id_user' => $request->id_user,
             // 'id_jurusan1' => null,
             // 'id_jurusan2' => null,
             // 'id_jadwal' => null,
             // 'id_ruang' => null,
             // 'status_pembayaran' => null,
         ]);
-        if($calon_siswa){
+        if ($calon_siswa) {
             return view('user.DataDiri')->with(['success' => 'Data Berhasil Disimpan!']);
-        }else{
+        } else {
             return view('user.FormDataDiri')->with(['error' => 'Data Gagal Disimpan!']);
         }
         // return response()->json($calon_siswa, HttpFoundationResponse::HTTP_OK);
     }
 }
-
-    
-

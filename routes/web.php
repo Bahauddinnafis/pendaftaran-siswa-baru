@@ -26,13 +26,13 @@ use App\Http\Controllers\user\OrangTuaController;
 
 // Route::get('/', [AdminController::class, 'index']);
 
-Route::get('/login', [AdminController::class, 'login']); // Login Admin
+// Route::get('/login', [AdminController::class, 'login']); // Login Admin
 
 // Route Login & Register Admin
-Route::get('/login-form-admin', [AuthController::class, 'login_form'])->name('login-form-admin');
-Route::get('/register-form-admin', [AuthController::class, 'register_form'])->name('register-form-admin');
-Route::post('register-admin', [AuthController::class, 'register'])->name('register-admin');
-Route::post('login-admin', [AuthController::class, 'login'])->name('login-admin');
+Route::get('/login-form-admin', [App\Http\Controllers\admin\AuthController::class, 'login_form'])->name('login-form-admin');
+Route::get('/register-form-admin', [App\Http\Controllers\admin\AuthController::class, 'register_form'])->name('register-form-admin');
+Route::post('register-admin', [App\Http\Controllers\admin\AuthController::class, 'register'])->name('register-admin');
+Route::post('login-admin', [App\Http\Controllers\admin\AuthController::class, 'login'])->name('login-admin');
 
 // Route Login & Register User
 Route::get('/login-form-user', [App\Http\Controllers\user\AuthController::class, 'login_form'])->name('login-form-user');
@@ -40,16 +40,12 @@ Route::get('/register-form-user', [App\Http\Controllers\user\AuthController::cla
 Route::post('register-user', [App\Http\Controllers\user\AuthController::class, 'register'])->name('register-user');
 Route::post('login-user', [App\Http\Controllers\user\AuthController::class, 'login'])->name('login-user');
 
-// Route Form Orang Tua Wali Calon Siswa
-
-Route::post('logout-user', [App\Http\Controllers\user\AuthController::class, 'logout'])->name('logout-user');
-
-
 // Masukkan route yang digunakan untuk admin
 Route::prefix('admin')->middleware(['admin'])->group(function () {
-    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/dashboard-admin', [DashboardController::class, 'index']);
     Route::get('/profile', [AdminController::class, 'profil']);
     Route::post('logout-admin', [AuthController::class, 'logout']);
+    // Route::get('jumlah-siswa', [AuthController::class, 'jumlah_siswa'])->name('jumlah-siswa');
 
     Route::get('/jadwal', [JadwalController::class, 'index'])->name('index-jadwal');
     Route::get('/form-jadwal-create', [JadwalController::class, 'form_jadwal_create'])->name('form-jadwal-create');
@@ -64,6 +60,8 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/form-jurusan-create', [JurusanController::class, 'form_jurusan_create'])->name('form-jurusan-create');
     Route::post('/create-form-jurusan', [JurusanController::class, 'store'])->name('create-jurusan');
 
+    // Siswa get data Calon Siswa
+    Route::get('/data-calon-siswa', [App\Http\Controllers\admin\DashboardController::class, 'data_calonSiswa'])->name('data-calon-siswa');
 });
 
 // Masukkan route yang digunakan untuk user
@@ -74,11 +72,13 @@ Route::prefix('user')->middleware(['user'])->group(function () {
     Route::get('/form-create', [App\Http\Controllers\user\CalonSiswaController::class, 'form_create'])->name('form.DataDiri'); // Form Calon Siswa
     Route::post('/data-diri-create', [App\Http\Controllers\user\CalonSiswaController::class, 'store'])->name('create.DataDiri'); // Create Calon Siswa
 
+
+    // Route Form Orang Tua Wali Calon Siswa
     Route::get('/cek-ortu', [App\Http\Controllers\user\OrangTuaController::class, 'index'])->name('cek-ortu');
     Route::get('/orangtua', [App\Http\Controllers\user\OrangTuaController::class, 'data_ortu'])->name('orangtua');
     Route::get('/orangtua-form', [App\Http\Controllers\user\OrangTuaController::class, 'form_create'])->name('orangtua-form');
     Route::post('/orangtua-create', [App\Http\Controllers\user\OrangTuaController::class, 'store'])->name('orangtua-create');
     Route::get('/orangtua-form-edit/{id}', [App\Http\Controllers\user\OrangTuaController::class, 'form_update'])->name('orangtua-form-edit');
     Route::put('/orangtua-update/{id}', [App\Http\Controllers\user\OrangTuaController::class, 'update'])->name('orangtua-update');
-
+    Route::post('logout-user', [App\Http\Controllers\user\AuthController::class, 'logout'])->name('logout-user');
 });

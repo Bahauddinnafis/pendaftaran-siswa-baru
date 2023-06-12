@@ -42,11 +42,11 @@
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item">
-                <a class="nav-link" href="/dashboard-siswa">
+                <a class="nav-link" href="dashboard-admin">
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="data-calon-siswa">
                     <span>Siswa</span></a>
             </li>
             <li class="nav-item">
@@ -194,6 +194,9 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{!! asset('assets/js/sb-admin-2.min.js') !!}"></script>
+
+    @yield('grafik')
+    <script src="https://code.highcharts.com/highcharts.js"></script>
 
 </body>
 

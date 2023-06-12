@@ -142,12 +142,6 @@
 			{{ $ortu['no_telp_wali'] }}
 		  </div>
 	  </li>
-	  <li class="list-group-item d-flex justify-content-between align-items-start">
-		<div class="ms-2 me-auto">
-		  <div class="fw-bold">Id User</div>
-		  {{ $ortu['id_user'] }}
-		</div>
-	</li>
 	<div class="mb-3">
 		<a href="{{ route('orangtua-form-edit', $ortu['id']) }}">
 			<button class="w-100 btn btn-lg btn-danger mt-3" type="submit">Edit</button>

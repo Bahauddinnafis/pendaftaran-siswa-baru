@@ -23,13 +23,13 @@ class AuthController extends Controller
         ]);
 
         AdminModel::create([
-            'nama' => $request -> nama,
-            'email' => $request -> email,
-            'password' => Hash::make($request ->password),
-            'no_telp' => $request -> no_telp,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'no_telp' => $request->no_telp,
         ]);
-        $request->session()->flash('success', 'Registrasi Sukses. Silahkan login.');
-        return redirect()->route('login-form-admin');
+        // $request->session()->flash('success', 'Registrasi Sukses. Silahkan login.');
+        return redirect()->route('login-form-admin')->with('succes', 'Registration successful. Please login.');
     }
 
     public function login(Request $request)
@@ -42,7 +42,7 @@ class AuthController extends Controller
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/user')->with('success', 'Login successful.');
+            return redirect()->intended('/admin')->with('success', 'Login successful.');
         }
 
         return back()->withErrors([
@@ -58,11 +58,13 @@ class AuthController extends Controller
         return redirect('login-form-admin');
     }
 
-    public function login_form() {
+    public function login_form()
+    {
         return view('admin.auth.login');
     }
 
-    public function register_form() {
+    public function register_form()
+    {
         return view('admin.auth.register');
     }
 }

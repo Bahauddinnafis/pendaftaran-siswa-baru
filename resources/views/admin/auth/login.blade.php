@@ -53,7 +53,7 @@
                                             {{ session('success') }}
                                         </div>
                                     @endif
-                                    <form class="user" method="post" action="/login-admin">
+                                    <form class="user" method="post" action="{{ route('login-admin') }}">
                                         {{ csrf_field() }}
                                         <div id="error-message" class="text-center text-danger">
                                         <div class="form-group">

@@ -4,10 +4,57 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\user\CalonSiswaController;
+use App\Models\Admin\RuangModel;
+use App\Models\CalonSiswaModel;
+use App\Models\Admin\JurusanModel;
+use App\Models\Admin\JadwalModel;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class DashboardController extends Controller
 {
-    public function index() {
-        return view('admin.dashboard');
+    public function index()
+    {
+        $jumlahCalonSiswa = CalonSiswaModel::count();
+        $ruangKelas = RuangModel::count();
+        $jurusanSMK = JurusanModel::count();
+        $jadwalSMK = JadwalModel::count();
+
+        return view('admin.dashboard', compact('jumlahCalonSiswa', 'ruangKelas', 'jurusanSMK', 'jadwalSMK'));
+    }
+
+    public function data_calonSiswa()
+    {
+        $user = Auth::user();
+        $id_user = $user->id;
+        $calon_siswa = CalonSiswaModel::where('id_user', $id_user)->get();
+        $calon_siswa = CalonSiswaModel::all()->toArray();
+        $kolom = array_chunk($calon_siswa, ceil(count($calon_siswa) / 2));
+        $kolom1 = $kolom[0];
+        // $kolom2 = $kolom[1];
+        // $calon_siswa = $calon_siswa->map(function ($item) {
+        //     return [
+        //         "id" => $item->id,
+        //         "nama_lengkap" => $item->nama_lengkap,
+        //         "foto" => $item->foto ? (url(Storage::url('foto_siswa/' . $item->foto))) : null,
+        //         "tanggal_lahir" => $item->tanggal_lahir,
+        //         "tempat_lahir" => $item->tempat_lahir,
+        //         "umur" => $item->umur,
+        //         "alamat" => $item->alamat,
+        //         "jenis_kelamin" => $item->jenis_kelamin,
+        //         "anak_ke" => $item->anak_ke,
+        //         "jumlah_saudara" => $item->jumlah_saudara,
+        //         "asal_sekolah" => $item->asal_sekolah,
+        //         "id_jurusan1" => $item->id_jurusan1,
+        //         "id_jurusan2" => $item->id_jurusan2,
+        //         "created_at" => $item->created_at,
+        //         "updated_at" => $item->updated_at,
+        //     ];
+        // });
+
+        return view('admin.data-calon-siswa', compact('calon_siswa', 'kolom1'));
     }
 }

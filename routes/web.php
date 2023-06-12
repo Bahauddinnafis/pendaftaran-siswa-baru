@@ -55,15 +55,24 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/jadwal', [JadwalController::class, 'index'])->name('index-jadwal');
     Route::get('/form-jadwal-create', [JadwalController::class, 'form_jadwal_create'])->name('form-jadwal-create');
     Route::post('/create-form-jadwal', [JadwalController::class, 'store'])->name('create-jadwal');
-
+    Route::get('/jadwal/{id}/edit', [JadwalController::class, 'edit'])->name('form-edit-jadwal');
+    Route::put('/jadwal/{id}', [JadwalController::class, 'update'])->name('update-jadwal');
+    Route::delete('/delete-jadwal/{id}', [JadwalController::class, 'destroy'])->name('delete-jadwal');
 
     Route::get('/ruang', [RuangController::class, 'index'])->name('index-ruang');
     Route::get('/form-ruang-create', [RuangController::class, 'form_ruang_create'])->name('form-ruang-create');
     Route::post('/create-form-ruang', [RuangController::class, 'store'])->name('create-ruang');
+    Route::get('/ruang/{id}/edit', [RuangController::class, 'edit'])->name('form-edit-ruang');
+    Route::put('/ruang/{id}', [RuangController::class, 'update'])->name('update-ruang');
+    Route::delete('/delete-ruang/{id}', [RuangController::class, 'destroy'])->name('delete-ruang');
+
 
     Route::get('/jurusan', [JurusanController::class, 'index'])->name('index-jurusan');
     Route::get('/form-jurusan-create', [JurusanController::class, 'form_jurusan_create'])->name('form-jurusan-create');
     Route::post('/create-form-jurusan', [JurusanController::class, 'store'])->name('create-jurusan');
+    Route::get('/jurusan/{id}/edit', [JurusanController::class, 'edit'])->name('form-edit-jurusan');
+    Route::put('/jurusan/{id}', [JurusanController::class, 'update'])->name('update-jurusan');
+    Route::delete('/delete-jurusan/{id}', [JurusanController::class, 'destroy'])->name('delete-jurusan');
 
 });
 

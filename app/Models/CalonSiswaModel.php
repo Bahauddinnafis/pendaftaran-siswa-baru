@@ -29,4 +29,9 @@ class CalonSiswaModel extends Model
         'id_ruang',
         'status_pembayaran',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(UserModel::class);
+    }
 }

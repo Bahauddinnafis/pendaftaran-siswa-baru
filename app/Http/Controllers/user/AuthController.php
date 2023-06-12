@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\UserModel;
+use App\Models\OrderModel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
@@ -49,7 +50,17 @@ class AuthController extends Controller
         if (Auth::guard('user')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/user')->with('success', 'login successfull');
+            // $user = Auth::guard('user')->user();
+            // $userStatus = $user->status_akun;
+            $user = Auth::user(); // Mendapatkan objek pengguna terotentikasi
+            $id_user = $user->id;
+            $order = OrderModel::where('id_user', $id_user)->first();
+            if($order->status == 'Unpaid')
+            {
+                return view('user.order');
+            } else {
+                return redirect()->intended('/user')->with('success', 'login successfull');
+            }
         }
 
         return back()->withErrors([

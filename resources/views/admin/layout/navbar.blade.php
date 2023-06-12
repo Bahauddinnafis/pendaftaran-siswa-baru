@@ -42,7 +42,7 @@
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item">
-                <a class="nav-link" href="/dashboard-siswa">
+                <a class="nav-link" href="/admin/">
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item">
@@ -50,7 +50,7 @@
                     <span>Siswa</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin/jadwal">
+                <a class="nav-link" href="/admin/jadwal">
                     <span>Jadwal</span></a>
             </li>
             <li class="nav-item">
@@ -61,11 +61,6 @@
                 <a class="nav-link" href="admin/ruang">
                     <span>Ruangan</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <span>Waktu</span></a>
-            </li>
-
         </ul>
         <!-- End of Sidebar -->
 
@@ -87,7 +82,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('admin')->user()->nama }}</span> --}}
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('admin')->user()->nama }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{!! asset('assets/img/undraw_profile.svg') !!}">
                             </a>

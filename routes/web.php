@@ -49,7 +49,7 @@ Route::post('logout-user', [App\Http\Controllers\user\AuthController::class, 'lo
 Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/profile', [AdminController::class, 'profil']);
-    Route::post('logout-admin', [AuthController::class, 'logout']);
+    Route::post('/logout-admin', [AuthController::class, 'logout']);
 
     Route::get('/jadwal', [JadwalController::class, 'index'])->name('index-jadwal');
     Route::get('/form-jadwal-create', [JadwalController::class, 'form_jadwal_create'])->name('form-jadwal-create');
@@ -77,11 +77,20 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
 
 // Masukkan route yang digunakan untuk user
 Route::prefix('user')->middleware(['user'])->group(function () {
-    // Route::get('/dashboard',  [App\Http\Controllers\user\Dashboard::class, 'index']);
+    Route::get('/order',  [App\Http\Controllers\user\OrderController::class, 'index'])->name('order');
+    Route::post('/checkout',  [App\Http\Controllers\user\OrderController::class, 'checkout'])->name('checkout');
+    Route::post('/midtrans-callback',  [App\Http\Controllers\user\OrderController::class, 'callback'])->name('checkout');
+    Route::post('/logout-user', [App\Http\Controllers\user\AuthController::class, 'logout']);
+
+
     Route::get('/', [App\Http\Controllers\user\DashboardController::class, 'index'])->name('dashboard-siswa');
-    Route::get('/calon-siswa', [App\Http\Controllers\user\CalonSiswaController::class, 'index'])->name('index.DataDiri'); // Get Calon Siswa
+    Route::get('/calon-siswa', [App\Http\Controllers\user\CalonSiswaController::class, 'data_diri'])->name('index.DataDiri'); // Get Data Calon Siswa
+    Route::get('/data-diri', [App\Http\Controllers\user\CalonSiswaController::class, 'index'])->name('data-diri'); // Cek apakah tersedia data diri calon siswa (diletakkan di navbar)
     Route::get('/form-create', [App\Http\Controllers\user\CalonSiswaController::class, 'form_create'])->name('form.DataDiri'); // Form Calon Siswa
     Route::post('/data-diri-create', [App\Http\Controllers\user\CalonSiswaController::class, 'store'])->name('create.DataDiri'); // Create Calon Siswa
+    Route::get('/form-edit/{id}', [App\Http\Controllers\user\CalonSiswaController::class, 'edit'])->name('form-edit-data-diri'); // Form Edit Calon Siswa
+    Route::put('/data-diri-edit/{id}', [App\Http\Controllers\user\CalonSiswaController::class, 'update'])->name('edit-data-diri'); // Edit Calon Siswa
+
 
     Route::get('/cek-ortu', [App\Http\Controllers\user\OrangTuaController::class, 'index'])->name('cek-ortu');
     Route::get('/orangtua', [App\Http\Controllers\user\OrangTuaController::class, 'data_ortu'])->name('orangtua');

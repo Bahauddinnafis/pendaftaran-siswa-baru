@@ -49,7 +49,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="/user/calon-siswa">
+                <a class="nav-link" href="/user/data-diri">
                     <span>Data Diri</span></a>
             </li>
 

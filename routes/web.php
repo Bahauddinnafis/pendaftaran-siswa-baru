@@ -39,6 +39,7 @@ Route::get('/login-form-user', [App\Http\Controllers\user\AuthController::class,
 Route::get('/register-form-user', [App\Http\Controllers\user\AuthController::class, 'register_form'])->name('register-form-user');
 Route::post('register-user', [App\Http\Controllers\user\AuthController::class, 'register'])->name('register-user');
 Route::post('login-user', [App\Http\Controllers\user\AuthController::class, 'login'])->name('login-user');
+Route::get('/user/export-kartu', [App\Http\Controllers\user\DashboardController::class, 'export_kartu'])->name('export-kartu');
 
 // Route Form Orang Tua Wali Calon Siswa
 
@@ -89,5 +90,9 @@ Route::prefix('user')->middleware(['user'])->group(function () {
     Route::post('/orangtua-create', [App\Http\Controllers\user\OrangTuaController::class, 'store'])->name('orangtua-create');
     Route::get('/orangtua-form-edit/{id}', [App\Http\Controllers\user\OrangTuaController::class, 'form_update'])->name('orangtua-form-edit');
     Route::put('/orangtua-update/{id}', [App\Http\Controllers\user\OrangTuaController::class, 'update'])->name('orangtua-update');
+
+    Route::get('/page-simpan-data',  [App\Http\Controllers\user\SimpanDataController::class, 'index'])->name('page-simpan-data');
+    Route::post('/simpan-data',  [App\Http\Controllers\user\SimpanDataController::class, 'simpan'])->name('simpan-data');
+
 
 });

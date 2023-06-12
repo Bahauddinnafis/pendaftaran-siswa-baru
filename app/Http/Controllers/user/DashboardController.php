@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\CalonSiswaModel;
 use App\Models\OrangTuaModel;
 use Illuminate\Support\Facades\Auth;
+use PDF;
+use Dompdf\Options;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -45,4 +48,20 @@ class DashboardController extends Controller
         ];
         return view('user.dashboard')->with('response', $response);
     }
+
+    public function export_kartu()
+    {
+        $user = Auth::user(); // Mendapatkan objek pengguna terotentikasi
+        $id_user = $user->id;
+        $calon_siswa = CalonSiswaModel::where('id_user', $id_user)->with(['jurusan1', 'jurusan2', 'ruang', 'jadwal'])->first();
+        $calon_siswa = $calon_siswa->toArray();
+
+        $data = ['title' => 'Welcome to ItSolutionStuff.com'];
+
+
+        $pdf = PDF::loadView('user.kartu-ujian', compact('calon_siswa'));
+
+        return $pdf->stream('export.pdf');
+    }
+   
 }

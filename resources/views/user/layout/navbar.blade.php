@@ -58,6 +58,11 @@
                     <span>Data Orang Tua</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="/user/page-simpan-data">
+                    <span>Simpan Data</span></a>
+            </li>
+
         </ul>
         <!-- End of Sidebar -->
 

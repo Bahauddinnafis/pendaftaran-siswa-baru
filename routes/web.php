@@ -40,12 +40,13 @@ Route::get('/register-form-user', [App\Http\Controllers\user\AuthController::cla
 Route::post('register-user', [App\Http\Controllers\user\AuthController::class, 'register'])->name('register-user');
 Route::post('login-user', [App\Http\Controllers\user\AuthController::class, 'login'])->name('login-user');
 Route::get('/user/export-kartu', [App\Http\Controllers\user\DashboardController::class, 'export_kartu'])->name('export-kartu');
+Route::post('/user/logout-user',  [App\Http\Controllers\user\AuthController::class, 'logout'])->name('logout');
 
 // Masukkan route yang digunakan untuk admin
 Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/dashboard-admin', [DashboardController::class, 'index']);
     Route::get('/profile', [AdminController::class, 'profil']);
-    Route::post('logout-admin', [AuthController::class, 'logout']);
+    Route::post('/logout-admin', [AuthController::class, 'logout']);
 
     Route::get('/jadwal', [JadwalController::class, 'index'])->name('index-jadwal');
     Route::get('/form-jadwal-create', [JadwalController::class, 'form_jadwal_create'])->name('form-jadwal-create');
@@ -100,4 +101,8 @@ Route::prefix('user')->middleware(['user'])->group(function () {
     Route::post('/orangtua-create', [App\Http\Controllers\user\OrangTuaController::class, 'store'])->name('orangtua-create');
     Route::get('/orangtua-form-edit/{id}', [App\Http\Controllers\user\OrangTuaController::class, 'form_update'])->name('orangtua-form-edit');
     Route::put('/orangtua-update/{id}', [App\Http\Controllers\user\OrangTuaController::class, 'update'])->name('orangtua-update');
+
+    Route::get('/page-simpan-data',  [App\Http\Controllers\user\SimpanDataController::class, 'index'])->name('page-simpan-data');
+    Route::post('/simpan-data',  [App\Http\Controllers\user\SimpanDataController::class, 'simpan'])->name('simpan-data');
+
 });

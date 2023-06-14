@@ -57,7 +57,7 @@ class AuthController extends Controller
             $order = OrderModel::where('id_user', $id_user)->first();
             if($order->status == 'Unpaid')
             {
-                return view('user.order');
+                return redirect('/user/order');
             } else {
                 return redirect()->intended('/user')->with('success', 'login successfull');
             }

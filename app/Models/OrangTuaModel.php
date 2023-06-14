@@ -15,6 +15,6 @@ class OrangTuaModel extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(UserModel::class, 'id_user');
     }
 }

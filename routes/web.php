@@ -33,6 +33,7 @@ Route::get('/login-form-admin', [AuthController::class, 'login_form'])->name('lo
 Route::get('/register-form-admin', [AuthController::class, 'register_form'])->name('register-form-admin');
 Route::post('register-admin', [AuthController::class, 'register'])->name('register-admin');
 Route::post('login-admin', [AuthController::class, 'login'])->name('login-admin');
+Route::post('/user/logout-user', [App\Http\Controllers\user\AuthController::class, 'logout']);
 
 // Route Login & Register User
 Route::get('/login-form-user', [App\Http\Controllers\user\AuthController::class, 'login_form'])->name('login-form-user');
@@ -81,7 +82,6 @@ Route::prefix('user')->middleware(['user'])->group(function () {
     Route::get('/order',  [App\Http\Controllers\user\OrderController::class, 'index'])->name('order');
     Route::post('/checkout',  [App\Http\Controllers\user\OrderController::class, 'checkout'])->name('checkout');
     Route::post('/midtrans-callback',  [App\Http\Controllers\user\OrderController::class, 'callback'])->name('checkout');
-    Route::post('/logout-user', [App\Http\Controllers\user\AuthController::class, 'logout']);
 
 
     Route::get('/', [App\Http\Controllers\user\DashboardController::class, 'index'])->name('dashboard-siswa');

@@ -55,7 +55,7 @@ class AuthController extends Controller
         Auth::guard('admin')->logout();
 
         $request->session()->flash('success', 'Logout telah berhasil.');
-        return redirect('login-form-admin');
+        return redirect('/login-form-admin');
     }
 
     public function login_form() {

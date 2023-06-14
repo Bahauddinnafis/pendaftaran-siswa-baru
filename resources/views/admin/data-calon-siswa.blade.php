@@ -29,14 +29,12 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @php
-                $halfCount = ceil($calon_siswa->count() / 2);
-            @endphp --}}
-            @foreach ($kolom1 as $index => $siswa)
+          
+            @foreach ($kolom1 as $index => $siswa) 
             <tr>
                 <th scope="row">{{ $index + 1 }}</th>
                 <td>{{ $siswa['nama_lengkap'] }}</td>
-                <td><img src="{{ asset('path/to/images/' . $siswa['foto']) }}" alt="Foto Siswa"></td>
+                <td><img src="{{ $siswa['foto'] }}" alt="Foto Siswa" width="354px" height="472px"></td>
                 <td>{{ $siswa['tanggal_lahir'] }}</td>
                 <td>{{ $siswa['tempat_lahir'] }}</td>
                 <td>{{ $siswa['umur'] }}</td>
@@ -52,33 +50,4 @@
             @endforeach
         </tbody>
     </table>
-
-    {{-- <table class="table2 table-bordered border-primary">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th scope="col">Jumlah Saudara</th>
-                <th scope="col">Asal Sekolah</th>
-                <th scope="col">ID Jurusan 1</th>
-                <th scope="col">ID Jurusan 2</th>
-                <th scope="col">Status Pembayaran</th>
-            </tr>
-        </thead>
-        <tbody>
-            @php
-                $halfCount = ceil($calon_siswa->count() / 2);
-            @endphp
-
-            @foreach ($kolom2 as $index => $siswa)
-                <tr>
-                    <th scope="row">{{ $index + 1 }}</th>
-                    <td>{{ $siswa['jumlah_saudara'] }}</td>
-                    <td>{{ $siswa['asal_sekolah'] }}</td>
-                    <td>{{ $siswa['id_jurusan1'] }}</td>
-                    <td>{{ $siswa['id_jurusan2'] }}</td>
-                    <td>{{ $siswa['status_pembayaran'] }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table> --}}
 @endsection

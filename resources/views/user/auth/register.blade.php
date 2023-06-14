@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="status" name="status" class="form-control form-control-user"
-                                                id="status" value="0" placeholder="Status" hidden>
+                                                id="status" value="1" placeholder="Status" hidden>
                                         </div>
                                         <input type="submit" value="Register" class="btn btn-primary btn-user btn-block">
                                         <hr>

@@ -24,4 +24,9 @@ class UserModel extends Model implements AuthenticatableContract
         'password',
     ];
 
+    public function calon_siswa()
+    {
+        return $this->hasOne(CalonSiswa::class, 'id_user');
+    }
+
 }

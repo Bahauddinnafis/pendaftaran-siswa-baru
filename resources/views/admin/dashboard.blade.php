@@ -128,162 +128,41 @@
  
 @endsection 
 
-@section('grafik')
+@section('chart')
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
-	var colors = Highcharts.getOptions().colors,
+var colors = Highcharts.getOptions().colors,
     categories = [
-        'Chrome',
-        'Safari',
-        'Edge',
-        'Firefox',
-        'Other'
+        'Laki-Laki',
+        'Perempuan',
     ],
     data = [
         {
-            y: 61.04,
+            y: 50.00,
             color: colors[2],
             drilldown: {
-                name: 'Chrome',
+                name: 'Laki-Laki',
                 categories: [
-                    'Chrome v97.0',
-                    'Chrome v96.0',
-                    'Chrome v95.0',
-                    'Chrome v94.0',
-                    'Chrome v93.0',
-                    'Chrome v92.0',
-                    'Chrome v91.0',
-                    'Chrome v90.0',
-                    'Chrome v89.0',
-                    'Chrome v88.0',
-                    'Chrome v87.0',
-                    'Chrome v86.0',
-                    'Chrome v85.0',
-                    'Chrome v84.0',
-                    'Chrome v83.0',
-                    'Chrome v81.0',
-                    'Chrome v89.0',
-                    'Chrome v79.0',
-                    'Chrome v78.0',
-                    'Chrome v76.0',
-                    'Chrome v75.0',
-                    'Chrome v72.0',
-                    'Chrome v70.0',
-                    'Chrome v69.0',
-                    'Chrome v56.0',
-                    'Chrome v49.0'
+                    'Laki-Laki'
                 ],
                 data: [
-                    36.89,
-                    18.16,
-                    0.54,
-                    0.7,
-                    0.8,
-                    0.41,
-                    0.31,
-                    0.13,
-                    0.14,
-                    0.1,
-                    0.35,
-                    0.17,
-                    0.18,
-                    0.17,
-                    0.21,
-                    0.1,
-                    0.16,
-                    0.43,
-                    0.11,
-                    0.16,
-                    0.15,
-                    0.14,
-                    0.11,
-                    0.13,
-                    0.12
+                    64.00
                 ]
             }
         },
         {
-            y: 9.47,
+            y: 50.00,
             color: colors[3],
             drilldown: {
-                name: 'Safari',
+                name: 'Perempuan',
                 categories: [
-                    'Safari v15.3',
-                    'Safari v15.2',
-                    'Safari v15.1',
-                    'Safari v15.0',
-                    'Safari v14.1',
-                    'Safari v14.0',
-                    'Safari v13.1',
-                    'Safari v13.0',
-                    'Safari v12.1'
+                    'Perempuan'
                 ],
                 data: [
-                    0.1,
-                    2.01,
-                    2.29,
-                    0.49,
-                    2.48,
-                    0.64,
-                    1.17,
-                    0.13,
-                    0.16
+                    36.00
                 ]
             }
         },
-        {
-            y: 9.32,
-            color: colors[5],
-            drilldown: {
-                name: 'Edge',
-                categories: [
-                    'Edge v97',
-                    'Edge v96',
-                    'Edge v95'
-                ],
-                data: [
-                    6.62,
-                    2.55,
-                    0.15
-                ]
-            }
-        },
-        {
-            y: 8.15,
-            color: colors[1],
-            drilldown: {
-                name: 'Firefox',
-                categories: [
-                    'Firefox v96.0',
-                    'Firefox v95.0',
-                    'Firefox v94.0',
-                    'Firefox v91.0',
-                    'Firefox v78.0',
-                    'Firefox v52.0'
-                ],
-                data: [
-                    4.17,
-                    3.33,
-                    0.11,
-                    0.23,
-                    0.16,
-                    0.15
-                ]
-            }
-        },
-        {
-            y: 11.02,
-            color: colors[6],
-            drilldown: {
-                name: 'Other',
-                categories: [
-                    'Other'
-                ],
-                data: [
-                    11.02
-                ]
-            }
-        }
     ],
     browserData = [],
     versionsData = [],
@@ -322,8 +201,8 @@ Highcharts.chart('chartContainer', {
         type: 'pie'
     },
     title: {
-        text: 'Siswa - Siswi SMK Angop',
-        align: 'left'
+        text: 'Siswa Siswi SMK Angop',
+        align: 'center'
     },
     plotOptions: {
         pie: {
@@ -335,7 +214,7 @@ Highcharts.chart('chartContainer', {
         valueSuffix: '%'
     },
     series: [{
-        name: 'Browsers',
+        name: 'Kategori',
         data: browserData,
         size: '60%',
         dataLabels: {
@@ -343,7 +222,7 @@ Highcharts.chart('chartContainer', {
             distance: -30
         }
     }, {
-        name: 'Versions',
+        name: 'Presentase',
         data: versionsData,
         size: '80%',
         innerSize: '60%',

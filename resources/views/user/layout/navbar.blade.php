@@ -49,13 +49,18 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="/user/calon-siswa">
+                <a class="nav-link" href="/user/data-diri">
                     <span>Data Diri</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/user/cek-ortu">
                     <span>Data Orang Tua</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/user/page-simpan-data">
+                    <span>Simpan Data</span></a>
             </li>
 
         </ul>

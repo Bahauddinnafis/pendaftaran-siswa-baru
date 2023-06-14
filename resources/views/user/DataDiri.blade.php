@@ -9,8 +9,7 @@
 <!-- isi bagian konten -->
 <!-- cara penulisan isi section yang panjang -->
 @section('konten')
-<h1>AKak</h1>
-{{-- @foreach ($calon_siswa as $siswa)
+@foreach ($calon_siswa as $siswa)
 	<div class="card">
         <ol class="list-group list-group-numbered">
             <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -81,6 +80,9 @@
             </li>
           </ol>
     </div>
-    @endforeach --}}
+    <a href="{{ route('form-edit-data-diri', $siswa['id']) }}">
+    <button class="w-100 btn btn-lg btn-danger mt-3">Edit Data Diri</button>
+    </a>
+    @endforeach
  
 @endsection

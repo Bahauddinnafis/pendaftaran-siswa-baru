@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Admin\JadwalModel;
+use App\Models\Admin\JurusanModel;
+use App\Models\Admin\RuangModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,4 +32,30 @@ class CalonSiswaModel extends Model
         'id_ruang',
         'status_pembayaran',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(UserModel::class);
+    }
+
+
+    public function jurusan1()
+    {
+        return $this->belongsTo(JurusanModel::class, 'id_jurusan1');
+    }
+
+    public function jurusan2()
+    {
+        return $this->belongsTo(JurusanModel::class, 'id_jurusan2');
+    }
+
+    public function jadwal()
+    {
+        return $this->belongsTo(JadwalModel::class, 'id_jadwal');
+    }
+
+    public function ruang()
+    {
+        return $this->belongsTo(RuangModel::class, 'id_ruang');
+    }
 }

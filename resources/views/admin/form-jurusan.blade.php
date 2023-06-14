@@ -20,11 +20,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="kuota" class="form-label">Kuota</label>
-                    <input type="integer" class="form-control" name="kuota" id="kuota">
+                    <input type="number" class="form-control" name="kuota" id="kuota">
                 </div>
                 <div class="mb-3">
                     <label for="sisakuota" class="form-label">Sisa Kuota</label>
-                    <input type="integer" class="form-control" name="sisa_kuota" id="sisa_kuota">
+                    <input type="number" class="form-control" name="sisa_kuota" id="sisa_kuota">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

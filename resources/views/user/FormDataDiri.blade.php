@@ -16,7 +16,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="namaLengkap" class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-control" name="nama_lengkap" id="nama_lengkap" placeholder="Suripno">
+                    <input type="text" class="form-control disabled-input" name="nama_lengkap" id="nama_lengkap" value="{{ Auth::guard('user')->user()->nama_lengkap }}" >
                 </div>
                 <div class="mb-3">
                     <label for="foto" class="form-label">Foto (4 x 3)</label>
@@ -65,7 +65,6 @@
                     <label for="asal_sekolah" class="form-label">Asal Sekolah</label>
                     <input type="text" class="form-control" name="asal_sekolah" id="asal_sekolah" placeholder="17">
                 </div>
-                <input type="text" value="1" hidden name="id_user" id="id_user">
                 <div class="mb-3">
                     <button class="w-100 btn btn-lg btn-danger mt-3" type="submit">Simpan</button>
                 </div>
@@ -73,4 +72,11 @@
         </div>
     </div>
  
+<style>
+    .disabled-input {
+        background-color: #f2f2f2; /* Warna latar belakang yang menandakan input tidak aktif */
+        pointer-events: none; /* Mencegah interaksi pengguna dengan elemen input */
+    }
+</style>
+
 @endsection

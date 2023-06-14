@@ -50,22 +50,17 @@
                     <span>Siswa</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin/jadwal">
+                <a class="nav-link" href="/admin/jadwal">
                     <span>Jadwal</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="admin/jurusan">
                     <span>Jurusan</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="admin/ruang">
                     <span>Ruangan</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <span>Waktu</span></a>
-            </li>
-
         </ul>
         <!-- End of Sidebar -->
 
@@ -87,7 +82,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('admin')->user()->nama }}</span> --}}
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('admin')->user()->nama }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{!! asset('assets/img/undraw_profile.svg') !!}">
                             </a>
@@ -195,7 +190,8 @@
     <!-- Custom scripts for all pages-->
     <script src="{!! asset('assets/js/sb-admin-2.min.js') !!}"></script>
 
-    @yield('grafik')
+    {{-- Chart --}}
+    @yield('chart')
     <script src="https://code.highcharts.com/highcharts.js"></script>
 
 </body>

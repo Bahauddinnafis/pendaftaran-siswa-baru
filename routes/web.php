@@ -81,7 +81,6 @@ Route::prefix('user')->middleware(['user'])->group(function () {
     Route::get('/order',  [App\Http\Controllers\user\OrderController::class, 'index'])->name('order');
     Route::post('/checkout',  [App\Http\Controllers\user\OrderController::class, 'checkout'])->name('checkout');
     Route::post('/midtrans-callback',  [App\Http\Controllers\user\OrderController::class, 'callback'])->name('checkout');
-    Route::post('/logout-user', [App\Http\Controllers\user\AuthController::class, 'logout']);
 
 
     Route::get('/', [App\Http\Controllers\user\DashboardController::class, 'index'])->name('dashboard-siswa');

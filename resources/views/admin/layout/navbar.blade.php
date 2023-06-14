@@ -54,11 +54,11 @@
                     <span>Jadwal</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin/jurusan">
+                <a class="nav-link" href="/admin/jurusan">
                     <span>Jurusan</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin/ruang">
+                <a class="nav-link" href="/admin/ruang">
                     <span>Ruangan</span></a>
             </li>
         </ul>

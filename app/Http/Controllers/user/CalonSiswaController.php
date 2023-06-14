@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\JurusanModel;
 use App\Models\CalonSiswaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,7 @@ class CalonSiswaController extends Controller
     {
         $user = Auth::user();
         $id_user = $user->id;
-        $calon_siswa = CalonSiswaModel::where('id_user', $id_user)->get();
+        $calon_siswa = CalonSiswaModel::where('id_user', $id_user)->with('jurusan1')->get();
         $calon_siswa = $calon_siswa->map(function ($item) {
             return [
                 "id" => $item->id,
@@ -41,8 +42,8 @@ class CalonSiswaController extends Controller
                 "anak_ke" => $item->anak_ke,
                 "jumlah_saudara" => $item->jumlah_saudara,
                 "asal_sekolah" => $item->asal_sekolah,
-                "id_jurusan1" => $item->id_jurusan1,
-                "id_jurusan2" => $item->id_jurusan2,
+                "id_jurusan1" => $item->jurusan->nama_jurusan,
+                "id_jurusan2" => $item->jurusan->nama_jurusan,
                 "created_at" => $item->created_at,
                 "updated_at" => $item->updated_at,
             ];
@@ -52,7 +53,8 @@ class CalonSiswaController extends Controller
 
     public function form_create()
     {
-        return view('user.FormDataDiri');
+        $jurusan = JurusanModel::get();
+        return view('user.FormDataDiri', compact('jurusan'));
     }
 
     public function store(Request $request)
@@ -68,6 +70,8 @@ class CalonSiswaController extends Controller
             'anak_ke' => 'required',
             'jumlah_saudara' => 'required',
             'asal_sekolah' => 'required',
+            'id_jurusan1' => 'required',
+            'id_jurusan2' => 'required',
         ]);
 
         if ($request->hasFile('foto')) {
@@ -91,8 +95,8 @@ class CalonSiswaController extends Controller
             'jumlah_saudara' => $request -> jumlah_saudara,
             'asal_sekolah' => $request -> asal_sekolah,
             'id_user' => $id_user,
-            // 'id_jurusan1' => null,
-            // 'id_jurusan2' => null,
+            'id_jurusan1' =>  $request -> id_jurusan1,
+            'id_jurusan2' =>  $request -> id_jurusan2,
             // 'id_jadwal' => null,
             // 'id_ruang' => null,
             // 'status_pembayaran' => null,

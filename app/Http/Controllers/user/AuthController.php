@@ -26,7 +26,8 @@ class AuthController extends Controller
             'status' => 'required',
         ]);
 
-        UserModel::create([
+
+        $user = UserModel::create([
             'nama_lengkap' => $request->nama_lengkap,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -55,11 +56,16 @@ class AuthController extends Controller
             $user = Auth::user(); // Mendapatkan objek pengguna terotentikasi
             $id_user = $user->id;
             $order = OrderModel::where('id_user', $id_user)->first();
-            if($order->status == 'Unpaid')
+            if($order)
             {
-                return redirect('/user/order');
+                if($order->status == 'Unpaid')
+                {
+                    return redirect('/user/order');
+                } else {
+                    return redirect()->intended('/user')->with('success', 'login successfull');
+                }
             } else {
-                return redirect()->intended('/user')->with('success', 'login successfull');
+                return redirect('/user/order');
             }
         }
 

@@ -58,4 +58,13 @@ class CalonSiswaModel extends Model
     {
         return $this->belongsTo(RuangModel::class, 'id_ruang');
     }
+
+    public function jurusan()
+    {
+        return $this->belongsTo(JurusanModel::class, 'id_jurusan1');
+    }
+    public function jurusan_kedua()
+    {
+        return $this->belongsTo(JurusanModel::class, 'id_jurusan2');
+    }
 }

@@ -66,6 +66,22 @@
                     <input type="text" class="form-control" name="asal_sekolah" id="asal_sekolah" placeholder="17">
                 </div>
                 <div class="mb-3">
+                    <label for="asal_sekolah" class="form-label">Pilihan Jurusan 1</label>
+                    <select class="form-select form-control" aria-label="Default select example" name="id_jurusan1">
+                        @foreach ($jurusan as $j)
+                        <option value="{{ $j['id'] }}">{{ $j['nama_jurusan'] }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="asal_sekolah" class="form-label">Pilihan Jurusan 2</label>
+                    <select class="form-select form-control" aria-label="Default select example" name="id_jurusan2">
+                        @foreach ($jurusan as $j)
+                        <option value="{{ $j['id'] }}">{{ $j['nama_jurusan'] }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3">
                     <button class="w-100 btn btn-lg btn-danger mt-3" type="submit">Simpan</button>
                 </div>
             </form>

@@ -74,11 +74,7 @@
                                             </div>
                                         </div>
                                         <input type="submit" value="login" class="btn btn-primary btn-user btn-block">
-                                    </form>                                 
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="/register-form-admin">Create an Account!</a>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

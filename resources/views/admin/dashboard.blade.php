@@ -19,7 +19,6 @@
 			<img src="{{ asset('assets/img/siswa.jpg') }}" class="card-img-top" alt="Foto Siswa SMK Angop">
 			<div class="card-body">
 			  <h5 class="card-title">Siswa SMK Angop</h5>
-			  <p class="card-text">Jumlah Siswa.</p>
 			  <h6 class="card-subtitle mb-2 text-muted">{{ $jumlahCalonSiswa }}</h6>
 			</div>
 		  </div>
@@ -28,8 +27,7 @@
 		  <div class="card">
 			<img src="{{ asset('assets/img/room.jpg') }}" class="card-img-top" alt="Foto Ruang Kelas SMK Angop">
 			<div class="card-body">
-			  <h5 class="card-title">Ruang Kelas SMK Angop</h5>
-			  <p class="card-text">Ruang Kelas SMK Angop.</p>
+			  <h5 class="card-title">Ruang Kelas</h5>
 			  <h6>{{ $ruangKelas }}</h6>
 			</div>
 		  </div>
@@ -38,8 +36,7 @@
 		  <div class="card">
 			<img src="{{ asset('assets/img/fishing.jpg') }}" class="card-img-top" alt="Foto Jurusan SMK Angop">
 			<div class="card-body">
-			  <h5 class="card-title">Jurusan SMK Angop</h5>
-			  <p class="card-text">Jurusan SMK Angop.</p>
+			  <h5 class="card-title">Jurusan</h5>
 			  <h6>{{ $jurusanSMK }}</h6>
 			</div>
 		  </div>
@@ -48,8 +45,7 @@
 			<div class="card">
 			  <img src="{{ asset('assets/img/kalender.jpg') }}" class="card-img-top" alt="Foto Jadwal Kelas SMK Angop">
 			  <div class="card-body">
-				<h5 class="card-title">Jadwal Pembelajaran</h5>
-				<p class="card-text">Jadwal Pembelajaran SMK Angop.</p>
+				<h5 class="card-title">Jadwal</h5>
 				<h6>{{ $jadwalSMK }}</h6>
 			  </div>
 			</div>

@@ -42,6 +42,9 @@ Route::post('login-user', [App\Http\Controllers\user\AuthController::class, 'log
 Route::get('/user/export-kartu', [App\Http\Controllers\user\DashboardController::class, 'export_kartu'])->name('export-kartu');
 Route::post('/user/logout-user',  [App\Http\Controllers\user\AuthController::class, 'logout'])->name('logout');
 
+// Landing Page
+Route::get('/',  [App\Http\Controllers\LandingPageController::class, 'home'])->name('/');
+
 // Masukkan route yang digunakan untuk admin
 Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/dashboard-admin', [DashboardController::class, 'index']);
@@ -104,5 +107,4 @@ Route::prefix('user')->middleware(['user'])->group(function () {
 
     Route::get('/page-simpan-data',  [App\Http\Controllers\user\SimpanDataController::class, 'index'])->name('page-simpan-data');
     Route::post('/simpan-data',  [App\Http\Controllers\user\SimpanDataController::class, 'simpan'])->name('simpan-data');
-
 });

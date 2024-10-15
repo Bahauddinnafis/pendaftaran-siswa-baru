@@ -24,11 +24,13 @@ class JadwalController extends Controller
             'sisa_kuota' => 'required|integer',
         ]);
 
-        $jadwal=JadwalModel::create([
-            'tanggal_tes' => $request -> tanggal_tes,
-            'waktu_tes' => $request -> waktu_tes,
-            'kuota' => $request ->kuota,
-            'sisa_kuota' => $request -> sisa_kuota,
+        $waktuTes = $request->tanggal_tes . ' ' . sprintf('%02d:00:00', $request->waktu_tes);
+
+        $jadwal = JadwalModel::create([
+            'tanggal_tes' => $request->tanggal_tes,
+            'waktu_tes' => $waktuTes,
+            'kuota' => $request->kuota,
+            'sisa_kuota' => $request->sisa_kuota,
         ]);
         if($jadwal){
             return redirect()->route('index-jadwal')->with(['success' => 'Data Berhasil Disimpan!']);
@@ -44,8 +46,9 @@ class JadwalController extends Controller
 
     public function edit($id)
     {
-    $jadwal = JadwalModel::findOrFail($id);
-    return view('admin.form-edit-jadwal', compact('jadwal'));
+        $jadwal = JadwalModel::findOrFail($id);
+        $jadwal->waktu_tes = (int) date('H', strtotime($jadwal->waktu_tes));
+        return view('admin.form-edit-jadwal', compact('jadwal'));
     }
 
     public function update(Request $request, $id)
@@ -58,9 +61,10 @@ class JadwalController extends Controller
         ]);
 
         $jadwal = JadwalModel::findOrFail($id);
+        $waktuTes = $request->tanggal_tes . ' ' . sprintf('%02d:00:00', $request->waktu_tes);
         $jadwal->update([
             'tanggal_tes' => $request->tanggal_tes,
-            'waktu_tes' => $request->waktu_tes,
+            'waktu_tes' => $waktuTes,
             'kuota' => $request->kuota,
             'sisa_kuota' => $request->sisa_kuota,
         ]);
